@@ -9,19 +9,19 @@
  * that starts the plugin.
  *
  * @link              https://justinestrada.com
- * @since             1.0.0
- * @package           Woo_Free_Product_Offer
+ * @since             0.0.1
+ * @package           Woo_Offer
  *
  * @wordpress-plugin
- * Plugin Name:       Woo FREE Product Offer
+ * Plugin Name:       Woo Offer
  * Plugin URI:        https://radicalskincare.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Version:           0.0.1
  * Author:            Justin Estrada
  * Author URI:        https://justinestrada.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       woo-free-product-offer
+ * Text Domain:       woo-offer
  * Domain Path:       /languages
  */
 
@@ -32,37 +32,37 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Start at version 0.0.1 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WOO_FREE_PRODUCT_OFFER_VERSION', '1.0.0' );
+define( 'Woo_Offer_VERSION', '0.0.1' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-woo-free-product-offer-activator.php
+ * This action is documented in includes/class-woo-offer-activator.php
  */
-function activate_woo_free_product_offer() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-free-product-offer-activator.php';
-	Woo_Free_Product_Offer_Activator::activate();
+function activate_Woo_Offer() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-offer-activator.php';
+	Woo_Offer_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-woo-free-product-offer-deactivator.php
+ * This action is documented in includes/class-woo-offer-deactivator.php
  */
-function deactivate_woo_free_product_offer() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-free-product-offer-deactivator.php';
-	Woo_Free_Product_Offer_Deactivator::deactivate();
+function deactivate_Woo_Offer() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-offer-deactivator.php';
+	Woo_Offer_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_woo_free_product_offer' );
-register_deactivation_hook( __FILE__, 'deactivate_woo_free_product_offer' );
+register_activation_hook( __FILE__, 'activate_Woo_Offer' );
+register_deactivation_hook( __FILE__, 'deactivate_Woo_Offer' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-woo-free-product-offer.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-woo-offer.php';
 
 /**
  * Begins execution of the plugin.
@@ -71,12 +71,12 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-woo-free-product-offer.php
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    0.0.1
  */
-function run_woo_free_product_offer() {
+function run_Woo_Offer() {
 
-	$plugin = new Woo_Free_Product_Offer();
+	$plugin = new Woo_Offer();
 	$plugin->run();
 
 }
-run_woo_free_product_offer();
+run_Woo_Offer();

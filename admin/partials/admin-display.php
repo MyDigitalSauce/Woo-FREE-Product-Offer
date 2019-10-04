@@ -6,10 +6,10 @@
  * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       https://justinestrada.com
- * @since      1.0.0
+ * @since      0.0.1
  *
- * @package    Woo_Free_Product_Offer
- * @subpackage Woo_Free_Product_Offer/admin/partials
+ * @package    Woo_Offer
+ * @subpackage Woo_Offer/admin/partials
  */
 ?>
 

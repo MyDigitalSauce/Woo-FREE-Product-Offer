@@ -7,10 +7,10 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://justinestrada.com
- * @since      1.0.0
+ * @since      0.0.1
  *
- * @package    Woo_Free_Product_Offer
- * @subpackage Woo_Free_Product_Offer/includes
+ * @package    Woo_Offer
+ * @subpackage Woo_Offer/includes
  */
 
 /**
@@ -22,27 +22,27 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
- * @package    Woo_Free_Product_Offer
- * @subpackage Woo_Free_Product_Offer/includes
+ * @since      0.0.1
+ * @package    Woo_Offer
+ * @subpackage Woo_Offer/includes
  * @author     Justin Estrada <justin@justinestrada.com>
  */
-class Woo_Free_Product_Offer {
+class Woo_Offer {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
-	 * @var      Woo_Free_Product_Offer_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Woo_Offer_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -51,7 +51,7 @@ class Woo_Free_Product_Offer {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -64,15 +64,15 @@ class Woo_Free_Product_Offer {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function __construct() {
-		if ( defined( 'WOO_FREE_PRODUCT_OFFER_VERSION' ) ) {
-			$this->version = WOO_FREE_PRODUCT_OFFER_VERSION;
+		if ( defined( 'Woo_Offer_VERSION' ) ) {
+			$this->version = Woo_Offer_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '0.0.1';
 		}
-		$this->plugin_name = 'woo-free-product-offer';
+		$this->plugin_name = 'woo-offer';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -86,15 +86,15 @@ class Woo_Free_Product_Offer {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Woo_Free_Product_Offer_Loader. Orchestrates the hooks of the plugin.
-	 * - Woo_Free_Product_Offer_i18n. Defines internationalization functionality.
-	 * - Woo_Free_Product_Offer_Admin. Defines all hooks for the admin area.
-	 * - Woo_Free_Product_Offer_Public. Defines all hooks for the public side of the site.
+	 * - Woo_Offer_Loader. Orchestrates the hooks of the plugin.
+	 * - Woo_Offer_i18n. Defines internationalization functionality.
+	 * - Woo_Offer_Admin. Defines all hooks for the admin area.
+	 * - Woo_Offer_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -103,41 +103,41 @@ class Woo_Free_Product_Offer {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woo-free-product-offer-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woo-offer-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woo-free-product-offer-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-woo-offer-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-woo-free-product-offer-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-woo-offer-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-woo-free-product-offer-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-woo-offer-public.php';
 
-		$this->loader = new Woo_Free_Product_Offer_Loader();
+		$this->loader = new Woo_Offer_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Woo_Free_Product_Offer_i18n class in order to set the domain and to register the hook
+	 * Uses the Woo_Offer_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Woo_Free_Product_Offer_i18n();
+		$plugin_i18n = new Woo_Offer_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -147,12 +147,12 @@ class Woo_Free_Product_Offer {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Woo_Free_Product_Offer_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Woo_Offer_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -163,22 +163,24 @@ class Woo_Free_Product_Offer {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Woo_Free_Product_Offer_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Woo_Offer_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		if ( isset($_GET['offer']) {
+			// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		}
 
 	}
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function run() {
 		$this->loader->run();
@@ -188,7 +190,7 @@ class Woo_Free_Product_Offer {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
+	 * @since     0.0.1
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -198,8 +200,8 @@ class Woo_Free_Product_Offer {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
-	 * @return    Woo_Free_Product_Offer_Loader    Orchestrates the hooks of the plugin.
+	 * @since     0.0.1
+	 * @return    Woo_Offer_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -208,7 +210,7 @@ class Woo_Free_Product_Offer {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     0.0.1
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {

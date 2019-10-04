@@ -4,10 +4,10 @@
  * Fired during plugin deactivation
  *
  * @link       https://justinestrada.com
- * @since      1.0.0
+ * @since      0.0.1
  *
- * @package    Woo_Free_Product_Offer
- * @subpackage Woo_Free_Product_Offer/includes
+ * @package    Woo_Offer
+ * @subpackage Woo_Offer/includes
  */
 
 /**
@@ -15,19 +15,19 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
- * @package    Woo_Free_Product_Offer
- * @subpackage Woo_Free_Product_Offer/includes
+ * @since      0.0.1
+ * @package    Woo_Offer
+ * @subpackage Woo_Offer/includes
  * @author     Justin Estrada <justin@justinestrada.com>
  */
-class Woo_Free_Product_Offer_Deactivator {
+class Woo_Offer_Deactivator {
 
 	/**
 	 * Short Description. (use period)
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public static function deactivate() {
 
