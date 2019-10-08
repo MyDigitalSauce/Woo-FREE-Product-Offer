@@ -6,7 +6,7 @@
  * This file is used to markup the public-facing aspects of the plugin.
  *
  * @link       https://justinestrada.com
- * @since      0.0.1
+ * @since      0.0.2
  *
  * @package    Woo_Offer
  * @subpackage Woo_Offer/public/partials

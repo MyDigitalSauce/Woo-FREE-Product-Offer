@@ -7,7 +7,7 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://justinestrada.com
- * @since      0.0.1
+ * @since      0.0.2
  *
  * @package    Woo_Offer
  * @subpackage Woo_Offer/includes
@@ -22,7 +22,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      0.0.1
+ * @since      0.0.2
  * @package    Woo_Offer
  * @subpackage Woo_Offer/includes
  * @author     Justin Estrada <justin@justinestrada.com>
@@ -33,7 +33,7 @@ class Woo_Offer {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   protected
 	 * @var      Woo_Offer_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -42,7 +42,7 @@ class Woo_Offer {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -51,7 +51,7 @@ class Woo_Offer {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -64,13 +64,13 @@ class Woo_Offer {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 */
 	public function __construct() {
 		if ( defined( 'Woo_Offer_VERSION' ) ) {
 			$this->version = Woo_Offer_VERSION;
 		} else {
-			$this->version = '0.0.1';
+			$this->version = '0.0.2';
 		}
 		$this->plugin_name = 'woo-offer';
 
@@ -94,7 +94,7 @@ class Woo_Offer {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -132,7 +132,7 @@ class Woo_Offer {
 	 * Uses the Woo_Offer_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -147,15 +147,16 @@ class Woo_Offer {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Woo_Offer_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		// not needed right now
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 	}
 
@@ -163,24 +164,26 @@ class Woo_Offer {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 * @access   private
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Woo_Offer_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Woo_Offer_Public(
+			$this->get_plugin_name(),
+			$this->get_version(),
+			json_decode( get_option( 'wfpo_settings' ) )
+		);
 
-		if ( isset($_GET['offer']) {
-			// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-			$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		}
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 */
 	public function run() {
 		$this->loader->run();
@@ -190,7 +193,7 @@ class Woo_Offer {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     0.0.1
+	 * @since     0.0.2
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -200,7 +203,7 @@ class Woo_Offer {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     0.0.1
+	 * @since     0.0.2
 	 * @return    Woo_Offer_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
@@ -210,7 +213,7 @@ class Woo_Offer {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     0.0.1
+	 * @since     0.0.2
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {

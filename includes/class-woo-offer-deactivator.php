@@ -4,7 +4,7 @@
  * Fired during plugin deactivation
  *
  * @link       https://justinestrada.com
- * @since      0.0.1
+ * @since      0.0.2
  *
  * @package    Woo_Offer
  * @subpackage Woo_Offer/includes
@@ -15,7 +15,7 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      0.0.1
+ * @since      0.0.2
  * @package    Woo_Offer
  * @subpackage Woo_Offer/includes
  * @author     Justin Estrada <justin@justinestrada.com>
@@ -27,7 +27,7 @@ class Woo_Offer_Deactivator {
 	 *
 	 * Long Description.
 	 *
-	 * @since    0.0.1
+	 * @since    0.0.2
 	 */
 	public static function deactivate() {
 

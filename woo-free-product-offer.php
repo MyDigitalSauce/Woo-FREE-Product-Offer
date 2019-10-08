@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://justinestrada.com
- * @since             0.0.1
+ * @since             0.0.2
  * @package           Woo_Offer
  *
  * @wordpress-plugin
  * Plugin Name:       Woo Offer
  * Plugin URI:        https://radicalskincare.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           0.0.1
+ * Description:       Checks for an offer url query and adds that offer to the cart, requires woocommerce.
+ * Version:           0.0.2
  * Author:            Justin Estrada
  * Author URI:        https://justinestrada.com
  * License:           GPL-2.0+
@@ -32,10 +32,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 0.0.1 and use SemVer - https://semver.org
+ * Start at version 0.0.2 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'Woo_Offer_VERSION', '0.0.1' );
+define( 'Woo_Offer_VERSION', '0.0.2' );
 
 /**
  * The code that runs during plugin activation.
@@ -71,7 +71,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-woo-offer.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    0.0.1
+ * @since    0.0.2
  */
 function run_Woo_Offer() {
 
