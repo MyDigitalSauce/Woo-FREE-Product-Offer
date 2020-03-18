@@ -29,7 +29,10 @@ class Woo_Offer_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->settings = $settings;
-		if ( $this->settings->enable_offer ) {
+
+		$this->is_checkout = (strpos($_SERVER['REQUEST_URI'], 'checkout') !== false);
+
+		if ( $this->settings->enable_offer && ! $this->is_checkout ) {
 		    add_action( 'wp_footer', array($this, 'offer_success_modal') );
 		}
 
@@ -41,7 +44,7 @@ class Woo_Offer_Public {
 	 * @since    0.0.2
 	 */
 	public function enqueue_styles() {
-		if ( $this->settings->enable_offer ) {
+		if ( $this->settings->enable_offer && ! $this->is_checkout ) {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/public.css', array(), $this->version, 'all' );
 		}
 	}
@@ -52,7 +55,7 @@ class Woo_Offer_Public {
 	 * @since    0.0.2
 	 */
 	public function enqueue_scripts() {
-		if ( $this->settings->enable_offer ) {
+		if ( $this->settings->enable_offer && ! $this->is_checkout ) {
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
 			$data = array(
 				'product' => get_post($this->settings->product_id),
@@ -77,22 +80,12 @@ class Woo_Offer_Public {
 		<div class="modal fade" id="offerSuccessModal" tabindex="-1" role="dialog" aria-labelledby="offerSuccessModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 		    <div class="modal-content" >
-		      <!-- <div class="modal-header">
-		        <h5 class="modal-title" id="offerSuccessModalLabel">Modal title</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div> -->
 		      <div class="modal-body" style="background-image: url('<?php echo plugin_dir_url( __FILE__ ); ?>/img/celebration.gif');" >
 		      	<div class="text-center my-5 py-5" >
 		      		<h3 class="text-white">Congratulations!</h3>
 		      		<h6 class="text-white" style="font-size: 22px;">A <strong>FREE</strong> gift has been added to your basket<br>for achieving a basket total over $75.</h6>
 		      	</div>
 		      </div>
-		      <!-- <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div> -->
 		    </div>
 		  </div>
 		</div>	

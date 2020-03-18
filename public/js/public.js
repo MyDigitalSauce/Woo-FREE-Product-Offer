@@ -6,7 +6,6 @@ console.log('WooOfferSettings', WooOfferSettings);
  * */
 const Cookie = {
 	read: function(name) {
-		console.log('Cookie read'); // test
 	    var nameEQ = name + "=";
 	    var ca = document.cookie.split(';');
 	    for(var i=0;i < ca.length;i++) {
@@ -85,7 +84,13 @@ const Woo_Offer = {
 		    	// console.log('total updated', total)
 				// wait 1 sec
 				setTimeout(function() {
-			    	Woo_Offer.onAddProductToCart(offer);
+					// if Offer Criteria Met
+					if ( Woo_Offer.isOfferCriteriaMet( offer ) ) {
+				    	Woo_Offer.onAddProductToCart(offer);						
+					} else {
+						// else Remove Offer Product From Cart
+						Woo_Offer.onRemoveOfferProduct( offer );
+					}
 				}, 1000);
 		    }
 		});
@@ -97,8 +102,8 @@ const Woo_Offer = {
 		return ( parseInt(Math.ceil(total)) >= offer.min );
     },
     onAddProductToCart: function(offer) {
-    	// is NOT already in cart
-		if ( Woo_Offer.isOfferCriteriaMet( offer ) && ! Woo_Offer.alreadyInCart(offer.product.title) ) {
+    	// if is NOT already in cart
+		if ( ! Woo_Offer.alreadyInCart(offer.product.title) ) {
 	    	Woo_Offer.addProductToCart(offer);
     	} else {
 		    Woo_Offer.setOfferProduct();
@@ -127,7 +132,6 @@ const Woo_Offer = {
     	let return_this = false;
     	// loop over each product in cart
     	$('.xoo-wsc-product').each(function() {
-    		// Eye Revive Creme
 	    	let this_product_title = $(this).find('.xoo-wsc-sum-col:nth-child(2) a:nth-child(2)').text();
 	    	// if product is offer product
 	    	if (this_product_title === product_title) {
@@ -175,6 +179,45 @@ const Woo_Offer = {
     	setTimeout(function() {
 	    	$('#offerSuccessModal').modal('hide');
     	}, 10000); // 10 sec
+    },
+    getCartProductElByTitle: function( product_title ) {
+    	const cart_product_el = false;
+    	// loop over each product in cart
+    	$('.xoo-wsc-product').each(function() {
+	    	let this_product_title = $(this).find('.xoo-wsc-sum-col:nth-child(2) a:nth-child(2)').text();
+	    	// if product is offer product
+	    	if (this_product_title === product_title) {
+    			// then is already in cart
+    			cart_product_el = $(this);
+	    	}
+    	});
+    	return cart_product_el;
+    },
+    onRemoveOfferProduct: function(offer) {
+    	const cart_product_el_to_remove = getCartProductElByTitle(offer.product_title);
+    	if (!cart_product_el_to_remove) {
+    		console.error('Something went wrong. Failed to remove');
+    		return false;
+    	}
+    	const cart_key = cart_product_el_to_remove.attr('data-xoo_wsc');
+    	Woo_Offer.removeOfferProduct( cart_key );
+    },
+    removeOfferProduct: function( cart_key ) {
+		// cart_key=ab1dc33daa233ca805d79bda2721a784&new_qty=0
+    	const data = {
+			"cart_key": cart_key,
+			"new_qty": 0,
+    	};
+		$.ajax({
+		  type: "POST",
+		  url: themeScript.site_url + '/?wc-ajax=xoo_wsc_add_to_cart',
+		  data: data,
+		  dataType: "json",
+		}).done(function(response) {
+		  	console.log('success', response);
+		}).fail(function(err) {
+			console.error('failed', err);
+		});
     },
 };
 /*

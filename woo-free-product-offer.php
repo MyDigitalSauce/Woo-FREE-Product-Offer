@@ -16,7 +16,7 @@
  * Plugin Name:       Woo Offer
  * Plugin URI:        https://radicalskincare.com
  * Description:       Checks for an offer url query and adds that offer to the cart, requires woocommerce.
- * Version:           0.0.2
+ * Version:           0.1.0
  * Author:            Justin Estrada
  * Author URI:        https://justinestrada.com
  * License:           GPL-2.0+
@@ -32,10 +32,8 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 0.0.2 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
  */
-define( 'Woo_Offer_VERSION', '0.0.2' );
+define( 'Woo_Offer_VERSION', '0.1.0' );
 
 /**
  * The code that runs during plugin activation.
